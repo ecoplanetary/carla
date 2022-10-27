@@ -1,4 +1,4 @@
-CARLA Simulator
+CARLA Simulator - ECOPLANETARY fork
 ===============
 
 [![Build Status](https://travis-ci.org/carla-simulator/carla.svg?branch=master)](https://travis-ci.org/carla-simulator/carla)
