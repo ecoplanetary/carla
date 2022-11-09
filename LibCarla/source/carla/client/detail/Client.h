@@ -278,6 +278,10 @@ namespace detail {
         std::string TireJSON,
         std::string BaseJSONPath);
 
+    void EcoExcavatorSetArmState(
+        rpc::ActorId vehicle,
+        uint16_t state);
+
     void ApplyControlToWalker(
         rpc::ActorId walker,
         const rpc::WalkerControl &control);

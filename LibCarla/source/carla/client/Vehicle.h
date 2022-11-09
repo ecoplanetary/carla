@@ -123,6 +123,8 @@ namespace client {
         std::string TireJSON = "",
         std::string BaseJSONPath = "");
 
+    void EcoExcavatorSetArmState(uint16_t state);
+
   private:
 
     const bool _is_control_sticky;

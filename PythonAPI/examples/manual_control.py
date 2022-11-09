@@ -134,6 +134,12 @@ try:
     from pygame.locals import K_z
     from pygame.locals import K_MINUS
     from pygame.locals import K_EQUALS
+    # -------------------------------------------------------------------------
+    #ECO_CUSTOM_CHANGE_BEGIN
+    from pygame.locals import K_e
+    from pygame.locals import K_f
+    #ECO_CUSTOM_CHANGE_END
+    # -------------------------------------------------------------------------
 except ImportError:
     raise RuntimeError('cannot import pygame, make sure pygame package is installed')
 
@@ -274,7 +280,10 @@ class World(object):
                 print('Please add some Vehicle Spawn Point to your UE4 scene.')
                 sys.exit(1)
             spawn_points = self.map.get_spawn_points()
-            spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()
+            #ALTERED
+            #spawn_point = random.choice(spawn_points) if spawn_points else carla.Transform()
+            spawn_point = spawn_points[100]
+            spawn_point.location.z += 2.0
             self.player = self.world.try_spawn_actor(blueprint, spawn_point)
             self.show_vehicle_telemetry = False
             self.modify_vehicle_physics(self.player)
@@ -499,6 +508,16 @@ class KeyboardControl(object):
                     else:
                         world.recording_start += 1
                     world.hud.notification("Recording start time is %d" % (world.recording_start))
+                # -------------------------------------------------------------------------
+                #ECO_CUSTOM_CHANGE_BEGIN
+                elif event.key == K_e:
+                    print("ECO::Set excavator arm state 1")
+                    world.player.eco_excavator_set_arm_state(1)
+                elif event.key == K_f:
+                    print("ECO::Set excavator arm state 2")
+                    world.player.eco_excavator_set_arm_state(2)
+                #ECO_CUSTOM_CHANGE_END
+                # -------------------------------------------------------------------------
                 if isinstance(self._control, carla.VehicleControl):
                     if event.key == K_q:
                         self._control.gear = 1 if self._control.reverse else -1

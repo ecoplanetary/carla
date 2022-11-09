@@ -548,6 +548,17 @@ void ACarlaWheeledVehicle::ShowDebugTelemetry(bool Enabled)
   }
 }
 
+// -------------------------------------------------------------------------
+// ECO_CUSTOM_CHANGE_BEGIN
+void ACarlaWheeledVehicle::EcoExcavatorSetArmState(int State)
+{
+    UE_LOG(LogCarla, Warning, TEXT("ACarlaWheeledVehicle::EcoExcavatorSetArmState: %d"), State);
+    // The following steps are in blueprints
+    EcoExcavatorSetAnimArmState(State);
+}
+// ECO_CUSTOM_CHANGE_END
+// -------------------------------------------------------------------------
+
 void ACarlaWheeledVehicle::SetVehicleLightState(const FVehicleLightState &LightState)
 {
   InputControl.LightState = LightState;

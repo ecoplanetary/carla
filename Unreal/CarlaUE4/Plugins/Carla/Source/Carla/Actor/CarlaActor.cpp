@@ -939,6 +939,28 @@ ECarlaServerResponse FVehicleActor::EnableChronoPhysics(
   return ECarlaServerResponse::Success;
 }
 
+// -------------------------------------------------------------------------
+// ECO_CUSTOM_CHANGE_BEGIN
+ECarlaServerResponse FVehicleActor::EcoExcavatorSetArmState(uint16_t State)
+{
+    if (IsDormant())
+    {
+    }
+    else
+    {
+        auto Vehicle = Cast<ACarlaWheeledVehicle>(GetActor());
+        if (Vehicle == nullptr)
+        {
+            return ECarlaServerResponse::NotAVehicle;
+        }
+        Vehicle->EcoExcavatorSetArmState((int) State);
+    }
+    return ECarlaServerResponse::Success;
+}
+// ECO_CUSTOM_CHANGE_END
+// -------------------------------------------------------------------------
+
+// 
 // FSensorActor functions ---------------------
 
 // FtrafficSignActor functions ---------------------

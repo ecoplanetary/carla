@@ -525,6 +525,10 @@ namespace detail {
           BaseJSONPath);
     }
 
+    void EcoExcavatorSetArmState(Vehicle &vehicle, uint16_t state) {
+      _client.EcoExcavatorSetArmState(vehicle.GetId(), state);
+    }
+
     /// @}
     // =========================================================================
     /// @name Operations with the recorder

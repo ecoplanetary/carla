@@ -450,6 +450,12 @@ namespace detail {
         BaseJSONPath);
   }
 
+  void Client::EcoExcavatorSetArmState(
+      rpc::ActorId vehicle,
+      uint16_t state){
+     _pimpl->AsyncCall("eco_excavator_set_arm_state", vehicle, state);
+  }
+      
   void Client::ApplyControlToWalker(rpc::ActorId walker, const rpc::WalkerControl &control) {
     _pimpl->AsyncCall("apply_control_to_walker", walker, control);
   }

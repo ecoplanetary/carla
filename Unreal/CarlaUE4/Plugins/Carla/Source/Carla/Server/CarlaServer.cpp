@@ -1635,6 +1635,36 @@ void FCarlaServer::FPimpl::BindActions()
     return R<void>::Success();
   };
 
+  // -------------------------------------------------------------------------
+  // ECO_CUSTOM_CHANGE_BEGIN
+  BIND_SYNC(eco_excavator_set_arm_state) << [this](
+      cr::ActorId ActorId,
+      uint16_t State) -> R<void>
+  {
+      REQUIRE_CARLA_EPISODE();
+      FCarlaActor* CarlaActor = Episode->FindCarlaActor(ActorId);
+      if (!CarlaActor)
+      {
+          return RespondError(
+              "eco_excavator_set_arm_state",
+              ECarlaServerResponse::ActorNotFound,
+              " Actor Id: " + FString::FromInt(ActorId));
+      }
+      ECarlaServerResponse Response =
+          CarlaActor->EcoExcavatorSetArmState(State);
+      if (Response != ECarlaServerResponse::Success)
+      {
+          return RespondError(
+              "eco_excavator_set_arm_state",
+              Response,
+              " Actor Id: " + FString::FromInt(ActorId));
+      }
+      return R<void>::Success();
+  };
+  // ECO_CUSTOM_CHANGE_END
+  // -------------------------------------------------------------------------
+
+
   // ~~ Traffic lights ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   BIND_SYNC(set_traffic_light_state) << [this](

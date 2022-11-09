@@ -194,6 +194,13 @@ public:
   UFUNCTION(Category = "CARLA Wheeled Vehicle", BlueprintCallable)
   void ShowDebugTelemetry(bool Enabled);
 
+  // -------------------------------------------------------------------------
+  // ECO_CUSTOM_CHANGE_BEGIN
+  UFUNCTION(Category = "CARLA Wheeled Vehicle", BlueprintCallable)
+  void EcoExcavatorSetArmState(int State);
+  // ECO_CUSTOM_CHANGE_END
+  // -------------------------------------------------------------------------
+
   /// @todo This function should be private to AWheeledVehicleAIController.
   void FlushVehicleControl();
 
@@ -274,6 +281,13 @@ protected:
 
   UFUNCTION(BlueprintCallable, CallInEditor)
   void ResetConstraints();
+
+  // -------------------------------------------------------------------------
+  // ECO_CUSTOM_CHANGE_BEGIN
+  UFUNCTION(BlueprintImplementableEvent)
+  void EcoExcavatorSetAnimArmState(const int State);
+  // ECO_CUSTOM_CHANGE_END
+  // -------------------------------------------------------------------------
 
 private:
 

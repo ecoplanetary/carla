@@ -315,6 +315,15 @@ public:
     return ECarlaServerResponse::ActorTypeMismatch;
   }
 
+  // -------------------------------------------------------------------------
+  // ECO_CUSTOM_CHANGE_BEGIN
+  virtual ECarlaServerResponse EcoExcavatorSetArmState(uint16_t)
+  {
+      return ECarlaServerResponse::ActorTypeMismatch;
+  }
+  // ECO_CUSTOM_CHANGE_END
+  // -------------------------------------------------------------------------
+
   // Traffic light functions
 
   virtual ECarlaServerResponse SetTrafficLightState(const ETrafficLightState&)
@@ -488,6 +497,13 @@ public:
       uint64_t MaxSubsteps, float MaxSubstepDeltaTime,
       const FString& VehicleJSON, const FString& PowertrainJSON,
       const FString& TireJSON, const FString& BaseJSONPath) final;
+
+  // -------------------------------------------------------------------------
+  // ECO_CUSTOM_CHANGE_BEGIN
+  virtual ECarlaServerResponse EcoExcavatorSetArmState(uint16_t) final;
+  // ECO_CUSTOM_CHANGE_END
+  // -------------------------------------------------------------------------
+
 };
 
 class FSensorActor : public FCarlaActor
