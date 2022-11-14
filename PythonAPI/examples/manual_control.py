@@ -512,10 +512,10 @@ class KeyboardControl(object):
                 #ECO_CUSTOM_CHANGE_BEGIN
                 elif event.key == K_e:
                     print("ECO::Set excavator arm state 1")
-                    world.player.eco_excavator_set_arm_state(1)
+                    world.player.eco_excavator_set_arm_state(2, 30)
                 elif event.key == K_f:
                     print("ECO::Set excavator arm state 2")
-                    world.player.eco_excavator_set_arm_state(2)
+                    world.player.eco_excavator_set_arm_state(2, -30)
                 #ECO_CUSTOM_CHANGE_END
                 # -------------------------------------------------------------------------
                 if isinstance(self._control, carla.VehicleControl):

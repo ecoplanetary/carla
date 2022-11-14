@@ -452,8 +452,9 @@ namespace detail {
 
   void Client::EcoExcavatorSetArmState(
       rpc::ActorId vehicle,
-      uint16_t state){
-     _pimpl->AsyncCall("eco_excavator_set_arm_state", vehicle, state);
+      int16_t id, 
+      int16_t angle){
+     _pimpl->AsyncCall("eco_excavator_set_arm_state", vehicle, id, angle);
   }
       
   void Client::ApplyControlToWalker(rpc::ActorId walker, const rpc::WalkerControl &control) {

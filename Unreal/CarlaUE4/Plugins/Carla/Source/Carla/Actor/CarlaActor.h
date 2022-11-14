@@ -317,7 +317,7 @@ public:
 
   // -------------------------------------------------------------------------
   // ECO_CUSTOM_CHANGE_BEGIN
-  virtual ECarlaServerResponse EcoExcavatorSetArmState(uint16_t)
+  virtual ECarlaServerResponse EcoExcavatorSetArmState(int16_t, int16_t)
   {
       return ECarlaServerResponse::ActorTypeMismatch;
   }
@@ -500,7 +500,7 @@ public:
 
   // -------------------------------------------------------------------------
   // ECO_CUSTOM_CHANGE_BEGIN
-  virtual ECarlaServerResponse EcoExcavatorSetArmState(uint16_t) final;
+  virtual ECarlaServerResponse EcoExcavatorSetArmState(int16_t Id, int16_t Angle) final;
   // ECO_CUSTOM_CHANGE_END
   // -------------------------------------------------------------------------
 

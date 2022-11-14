@@ -550,11 +550,11 @@ void ACarlaWheeledVehicle::ShowDebugTelemetry(bool Enabled)
 
 // -------------------------------------------------------------------------
 // ECO_CUSTOM_CHANGE_BEGIN
-void ACarlaWheeledVehicle::EcoExcavatorSetArmState(int State)
+void ACarlaWheeledVehicle::EcoExcavatorSetArmState(int Id, int Angle)
 {
-    UE_LOG(LogCarla, Warning, TEXT("ACarlaWheeledVehicle::EcoExcavatorSetArmState: %d"), State);
+    UE_LOG(LogCarla, Warning, TEXT("ACarlaWheeledVehicle::EcoExcavatorSetArmState: %d  %d"), State, Angle);
     // The following steps are in blueprints
-    EcoExcavatorSetAnimArmState(State);
+    EcoExcavatorSetAnimArmState(Id, Angle);
 }
 // ECO_CUSTOM_CHANGE_END
 // -------------------------------------------------------------------------

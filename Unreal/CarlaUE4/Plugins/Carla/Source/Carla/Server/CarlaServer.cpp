@@ -1639,7 +1639,8 @@ void FCarlaServer::FPimpl::BindActions()
   // ECO_CUSTOM_CHANGE_BEGIN
   BIND_SYNC(eco_excavator_set_arm_state) << [this](
       cr::ActorId ActorId,
-      uint16_t State) -> R<void>
+      int16_t Id,
+      int16_t Angle) -> R<void>
   {
       REQUIRE_CARLA_EPISODE();
       FCarlaActor* CarlaActor = Episode->FindCarlaActor(ActorId);
@@ -1651,7 +1652,7 @@ void FCarlaServer::FPimpl::BindActions()
               " Actor Id: " + FString::FromInt(ActorId));
       }
       ECarlaServerResponse Response =
-          CarlaActor->EcoExcavatorSetArmState(State);
+          CarlaActor->EcoExcavatorSetArmState(Id, Angle);
       if (Response != ECarlaServerResponse::Success)
       {
           return RespondError(

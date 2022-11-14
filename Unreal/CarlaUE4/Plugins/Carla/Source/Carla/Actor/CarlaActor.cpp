@@ -941,7 +941,7 @@ ECarlaServerResponse FVehicleActor::EnableChronoPhysics(
 
 // -------------------------------------------------------------------------
 // ECO_CUSTOM_CHANGE_BEGIN
-ECarlaServerResponse FVehicleActor::EcoExcavatorSetArmState(uint16_t State)
+ECarlaServerResponse FVehicleActor::EcoExcavatorSetArmState(int16_t Id, int16_t Angle)
 {
     if (IsDormant())
     {
@@ -953,7 +953,7 @@ ECarlaServerResponse FVehicleActor::EcoExcavatorSetArmState(uint16_t State)
         {
             return ECarlaServerResponse::NotAVehicle;
         }
-        Vehicle->EcoExcavatorSetArmState((int) State);
+        Vehicle->EcoExcavatorSetArmState((int) Id, (int) Angle);
     }
     return ECarlaServerResponse::Success;
 }

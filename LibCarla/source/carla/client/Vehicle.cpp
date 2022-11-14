@@ -132,8 +132,8 @@ namespace client {
         BaseJSONPath);
   }
 
-  void Vehicle::EcoExcavatorSetArmState(uint16_t state){
-    GetEpisode().Lock()->EcoExcavatorSetArmState(*this, state);
+  void Vehicle::EcoExcavatorSetArmState(int16_t id, int16_t angle){
+    GetEpisode().Lock()->EcoExcavatorSetArmState(*this, id, angle);
   }
 
 } // namespace client

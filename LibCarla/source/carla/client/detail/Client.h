@@ -280,7 +280,8 @@ namespace detail {
 
     void EcoExcavatorSetArmState(
         rpc::ActorId vehicle,
-        uint16_t state);
+        int16_t id,
+        int16_t angle);
 
     void ApplyControlToWalker(
         rpc::ActorId walker,

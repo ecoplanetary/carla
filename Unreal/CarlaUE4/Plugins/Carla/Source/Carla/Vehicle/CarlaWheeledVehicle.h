@@ -197,7 +197,7 @@ public:
   // -------------------------------------------------------------------------
   // ECO_CUSTOM_CHANGE_BEGIN
   UFUNCTION(Category = "CARLA Wheeled Vehicle", BlueprintCallable)
-  void EcoExcavatorSetArmState(int State);
+  void EcoExcavatorSetArmState(int Id, int Angle);
   // ECO_CUSTOM_CHANGE_END
   // -------------------------------------------------------------------------
 
@@ -285,7 +285,7 @@ protected:
   // -------------------------------------------------------------------------
   // ECO_CUSTOM_CHANGE_BEGIN
   UFUNCTION(BlueprintImplementableEvent)
-  void EcoExcavatorSetAnimArmState(const int State);
+  void EcoExcavatorSetAnimArmState(const int Id, const int Angle);
   // ECO_CUSTOM_CHANGE_END
   // -------------------------------------------------------------------------
 

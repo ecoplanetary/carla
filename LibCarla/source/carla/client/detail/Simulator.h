@@ -525,8 +525,8 @@ namespace detail {
           BaseJSONPath);
     }
 
-    void EcoExcavatorSetArmState(Vehicle &vehicle, uint16_t state) {
-      _client.EcoExcavatorSetArmState(vehicle.GetId(), state);
+    void EcoExcavatorSetArmState(Vehicle &vehicle, int16_t id, int16_t angle) {
+      _client.EcoExcavatorSetArmState(vehicle.GetId(), id, angle);
     }
 
     /// @}

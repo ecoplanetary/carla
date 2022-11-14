@@ -123,7 +123,7 @@ namespace client {
         std::string TireJSON = "",
         std::string BaseJSONPath = "");
 
-    void EcoExcavatorSetArmState(uint16_t state);
+    void EcoExcavatorSetArmState(int16_t id, int16_t angle);
 
   private:
 
