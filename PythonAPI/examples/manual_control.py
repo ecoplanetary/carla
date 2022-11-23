@@ -148,6 +148,8 @@ try:
 except ImportError:
     raise RuntimeError('cannot import numpy, make sure numpy package is installed')
 
+import time
+import threading
 
 # ==============================================================================
 # -- Global functions ----------------------------------------------------------
@@ -188,6 +190,78 @@ def get_actor_blueprints(world, filter, generation):
     except:
         print("   Warning! Actor Generation is not valid. No actor will be spawned.")
         return []
+
+excavator_players = []
+excavator_arm_state = {
+    "swing": {
+        "current": 0,
+        "target": 0
+    },
+    "arm_horizontal": {
+        "current": 0,
+        "target": 0
+    },
+    "arm_vertical_first": {
+        "current": 0,
+        "target": 0
+    },
+    "arm_vertical_second": {
+        "current": 0,
+        "target": 0
+    },
+    "arm_vertical_third": {
+        "current": 0,
+        "target": 0
+    },
+    "bucket": {
+        "current": 0,
+        "target": 0
+    },
+}
+
+def control_excavator_joint(player, joint_name, angle) :
+    """
+    joint_names: str -  "swing", 
+                        "arm_horizontal", 
+                        "arm_vertical_first", 
+                        "arm_vertical_second", 
+                        "arm_vertical_third", 
+                        "bucket"
+    angle: int - Recommented to use values between -180, 180
+    """
+
+    if joint_name ==  "swing" :
+        player.eco_excavator_set_arm_state(4, angle)
+    if joint_name ==  "bucket" :
+        player.eco_excavator_set_arm_state(5, angle)
+    if joint_name ==  "arm_vertical_first" :
+        player.eco_excavator_set_arm_state(1, angle)
+    if joint_name ==  "arm_vertical_second" :
+        player.eco_excavator_set_arm_state(2, angle)
+    if joint_name ==  "arm_vertical_third" :
+        player.eco_excavator_set_arm_state(2, angle)
+
+def excavator_animation_function_loop(name):
+
+    treshold = 1
+    animation_speed = 1
+
+    while(True) :
+        time.sleep(0.05)
+        print ("loop")
+        if len(excavator_players) == 0:
+            continue
+
+        for name, state in excavator_arm_state.items():
+            # Check equality with tolerance
+            if abs(state["target"] - state["current"]) > treshold:
+                if state["target"] > state["current"] :
+                    state["current"] += animation_speed
+                else: 
+                    state["current"] -= animation_speed
+                
+                print ("set {} to {}".format(excavator_players[0], int(state["current"])))
+                control_excavator_joint(excavator_players[0], name, int(state["current"]))
 
 
 # ==============================================================================
@@ -297,6 +371,10 @@ class World(object):
         self.camera_manager.set_sensor(cam_index, notify=False)
         actor_type = get_actor_display_name(self.player)
         self.hud.notification(actor_type)
+
+        excavator_players.append(self.player)
+        eco_thread = threading.Thread(target=excavator_animation_function_loop, args=(1,))
+        eco_thread.start()
 
         if self.sync:
             self.world.tick()
@@ -511,11 +589,13 @@ class KeyboardControl(object):
                 # -------------------------------------------------------------------------
                 #ECO_CUSTOM_CHANGE_BEGIN
                 elif event.key == K_e:
-                    print("ECO::Set excavator arm state 1")
-                    world.player.eco_excavator_set_arm_state(2, 30)
+                    # Set second joint to 30 degrees
+                    # world.player.eco_excavator_set_arm_state(2, 30)
+                    excavator_arm_state["arm_vertical_first"]["target"] = 60
                 elif event.key == K_f:
-                    print("ECO::Set excavator arm state 2")
-                    world.player.eco_excavator_set_arm_state(2, -30)
+                    excavator_arm_state["arm_vertical_first"]["target"] = 0
+                    # Set thirds joint to -30 degrees
+                    #world.player.eco_excavator_set_arm_state(3, -30)
                 #ECO_CUSTOM_CHANGE_END
                 # -------------------------------------------------------------------------
                 if isinstance(self._control, carla.VehicleControl):
